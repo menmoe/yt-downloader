@@ -88,6 +88,7 @@ python -m PyInstaller ^
   --onefile ^
   --name "YT Downloader" ^
   --add-data "%CERTIFI%;certifi" ^
+  --add-data "core;core" ^
   %FFMPEG_ARGS% ^
   --hidden-import yt_dlp ^
   --hidden-import yt_dlp.extractor ^
@@ -95,7 +96,7 @@ python -m PyInstaller ^
   --hidden-import certifi ^
   --collect-all yt_dlp ^
   --collect-all certifi ^
-  yt_downloader_gui_windows.py
+  windows\yt_downloader_gui_windows.py
 
 if errorlevel 1 (
     echo.
