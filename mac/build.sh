@@ -14,7 +14,7 @@
 set -e
 
 APP_NAME="YT Downloader"
-SCRIPT="yt_downloader_gui.py"
+SCRIPT="mac/yt_downloader_gui.py"
 
 echo ""
 echo "══════════════════════════════════════════════"
@@ -80,6 +80,7 @@ eval python3 -m PyInstaller \
   --onedir \
   --name "$APP_NAME" \
   --add-data "$CERTIFI_PATH:certifi" \
+  --add-data "core:core" \
   $FFMPEG_ARGS \
   --hidden-import "yt_dlp" \
   --hidden-import "yt_dlp.extractor" \
