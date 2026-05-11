@@ -114,19 +114,56 @@ You can also use relative paths (`../my-folder`), environment variables (`%USERP
 yt-downloader/
 ├── README.md
 ├── .gitignore
+│
+├── core/
+│   └── downloader.py          # Shared logic — all frontends import from here
+│
 ├── mac/
-│   ├── yt_downloader_gui.py     # macOS GUI app
-│   └── build.sh                 # Builds YT Downloader.app via PyInstaller
-└── windows/
-    ├── yt_downloader_gui_windows.py   # Windows GUI app
-    └── build_windows.bat              # Builds YT Downloader.exe via PyInstaller
+│   ├── yt_downloader_gui.py   # macOS GUI (UI only, no download logic)
+│   └── build.sh               # Builds YT Downloader.app via PyInstaller
+│
+├── windows/
+│   ├── yt_downloader_gui_windows.py  # Windows GUI (UI only, no download logic)
+│   └── build_windows.bat             # Builds YT Downloader.exe via PyInstaller
+│
+└── cli/
+    └── yt_downloader_cli.py   # Terminal frontend — interactive or flag-driven
 ```
+
+All download logic — fetching playlist metadata, building yt-dlp options, path resolution, ETA calculation — lives exclusively in `core/downloader.py`. The GUI and CLI files contain only UI code. This means bug fixes and new features go in one place and every frontend gets them automatically.
+
+---
+
+## CLI
+
+The CLI works on macOS, Windows, and Linux. No build step needed — just Python.
+
+```bash
+# Install dependencies once
+pip install yt-dlp certifi
+
+# Interactive mode — walks you through everything (same experience as the terminal version)
+python cli/yt_downloader_cli.py
+
+# Non-interactive — pass everything as flags (good for scripting)
+python cli/yt_downloader_cli.py --url "https://youtube.com/playlist?list=..." --fmt mp3 --quality 320
+
+# Download specific videos from a playlist (by index)
+python cli/yt_downloader_cli.py --url "..." --fmt mp4 --quality 1080p --indices "1,3,5-8"
+
+# Save to a shorthand path
+python cli/yt_downloader_cli.py --url "..." --out "$music/YouTube"
+```
+
+Run `python cli/yt_downloader_cli.py --help` for the full list of flags.
 
 ---
 
 ## How it works
 
-The app is a Python + [tkinter](https://docs.python.org/3/library/tkinter.html) GUI wrapped around [yt-dlp](https://github.com/yt-dlp/yt-dlp), the most actively maintained YouTube download library available. [PyInstaller](https://pyinstaller.org) bundles Python, yt-dlp, certifi (SSL certificates), and ffmpeg into a single self-contained binary — no runtime dependencies needed.
+The app is built around a shared `core/downloader.py` module that contains all download logic — playlist fetching, yt-dlp configuration, path resolution, and progress calculation. The macOS GUI, Windows GUI, and CLI are thin frontends that only handle user interaction; they import everything from core. This means a bug fixed or feature added in `core/` is instantly available in all three frontends.
+
+The GUIs use Python's built-in [tkinter](https://docs.python.org/3/library/tkinter.html) library (no extra UI dependencies) wrapped around [yt-dlp](https://github.com/yt-dlp/yt-dlp). [PyInstaller](https://pyinstaller.org) bundles Python, yt-dlp, certifi (SSL certificates), and ffmpeg into a single self-contained binary — no runtime dependencies needed to run the built app.
 
 ---
 
