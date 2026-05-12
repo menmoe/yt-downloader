@@ -91,24 +91,6 @@ The script installs all Python dependencies automatically. When it finishes, Exp
 
 ---
 
-## Path shorthands
-
-When choosing a save location, you can type any of these instead of a full path:
-
-| Shorthand    | Resolves to                               |
-| ------------ | ----------------------------------------- |
-| `$desktop`   | `~/Desktop`                               |
-| `$downloads` | `~/Downloads`                             |
-| `$documents` | `~/Documents`                             |
-| `$music`     | `~/Music`                                 |
-| `$videos`    | `~/Movies` (macOS) / `~/Videos` (Windows) |
-| `$home`      | Your home directory                       |
-| `~`          | Your home directory                       |
-
-You can also use relative paths (`../my-folder`), environment variables (`%USERPROFILE%\Music` on Windows), and standard absolute paths.
-
----
-
 ## Repo structure
 
 ```text
@@ -137,26 +119,64 @@ All download logic — playlist metadata fetching, yt-dlp configuration, path re
 
 ## CLI
 
-The CLI works on macOS, Windows, and Linux. No build step is required.
+The CLI works on macOS, Windows, and Linux. No build step needed.
 
 ```bash
-# Install dependencies once
 pip install yt-dlp certifi
+```
 
-# Interactive mode
+**Interactive mode** (recommended if you're using it manually):
+```bash
 python cli/yt_downloader_cli.py
+```
 
-# Non-interactive mode (useful for scripting)
+**Non-interactive**, for scripting:
+```bash
+# Download a playlist as MP3
 python cli/yt_downloader_cli.py --url "https://youtube.com/playlist?list=..." --fmt mp3 --quality 320
 
-# Download specific videos from a playlist (by index)
+# Download specific videos by index
 python cli/yt_downloader_cli.py --url "..." --fmt mp4 --quality 1080p --indices "1,3,5-8"
 
-# Save to a shorthand path
+# Use a path shorthand for the output folder
 python cli/yt_downloader_cli.py --url "..." --out "$music/YouTube"
 ```
 
-Run `python cli/yt_downloader_cli.py --help` for the full list of flags.
+Run `python cli/yt_downloader_cli.py --help` for all available flags.
+
+---
+
+## Web interface
+
+A browser-based option for people who prefer not to install an app. Runs a small local server on your machine -- nothing is hosted externally, no data leaves your computer.
+
+```bash
+# Run from the repo root
+pip install -r web/requirements.txt
+python web/app.py
+```
+
+Then open [http://localhost:5000](http://localhost:5000). Same features as the desktop app: fetch a URL, pick videos from a checkbox list, choose format and quality, and download. Completed files are served directly to your browser.
+
+See [web/README.md](web/README.md) for more detail.
+
+---
+
+## Path shorthands
+
+Instead of typing out a full path for the output folder, you can use these anywhere the app or CLI asks for a location:
+
+| Shorthand | Resolves to |
+|-----------|-------------|
+| `$desktop` | `~/Desktop` |
+| `$downloads` | `~/Downloads` |
+| `$documents` | `~/Documents` |
+| `$music` | `~/Music` |
+| `$videos` | `~/Movies` (macOS) / `~/Videos` (Windows) |
+| `$home` | Your home directory |
+| `~` | Your home directory |
+
+Relative paths, `%USERPROFILE%` style env vars on Windows, and standard absolute paths all work too.
 
 ---
 
