@@ -1,8 +1,8 @@
 # YT Downloader
 
-A clean, modern desktop app for downloading YouTube videos and playlists as **MP3** or **MP4**. No terminal, no commands — just paste a URL and click download.
+A clean, modern desktop app for downloading YouTube videos and playlists as **MP3** or **MP4**. No terminal or commands needed — just paste a URL and click download.
 
-> **Pre-built binaries available on the [Releases page](../../releases) — no Python required.**
+> **Pre-built binaries are available on the [Releases page](../../releases). No Python required.**
 
 ![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -12,47 +12,48 @@ A clean, modern desktop app for downloading YouTube videos and playlists as **MP
 
 ## Features
 
-- 🎵 Download as **MP3** (128 / 192 / 320 kbps) or **🎬 MP4** (480p / 720p / 1080p / best)
-- 📋 Paste a **playlist URL** and pick exactly which videos to download via checkboxes
-- ✅ **Select all / Select none** controls for quick playlist management
-- 🔢 Files are numbered by their original playlist order, even when you download a custom selection
-- 📁 Flexible output folder — supports full paths, relative paths, and shorthands like `$desktop`, `$downloads`, `$documents`
-- 📊 Live progress bar with speed and ETA per video
-- 📝 Scrollable log panel showing each completed file
-- 🎨 Dark-themed UI that feels native on both platforms
-- 🔒 SSL fixed out of the box on macOS (no certificate errors)
-- 🖥️ DPI-aware on Windows (sharp on 4K / high-DPI screens)
-- 🎞️ MP4 output uses H.264 + AAC — plays natively in QuickTime, Windows Media Player, and VLC with no compatibility warnings
+* Download as **MP3** (128 / 192 / 320 kbps) or **MP4** (480p / 720p / 1080p / best)
+* Paste a playlist URL and choose exactly which videos to download with checkboxes
+* Select all / Select none controls for quick playlist management
+* Files stay numbered according to the original playlist order, even when downloading only part of a playlist
+* Flexible output folder support with full paths, relative paths, and shorthands like `$desktop`, `$downloads`, and `$documents`
+* Live progress bar with speed and ETA per video
+* Scrollable log panel showing completed downloads
+* Dark-themed UI that feels native on both macOS and Windows
+* SSL works out of the box on macOS with no certificate issues
+* DPI-aware on Windows for sharp rendering on high-DPI displays
+* MP4 output uses H.264 + AAC for native playback in QuickTime, Windows Media Player, and VLC
 
 ---
 
 ## Download (No Python needed)
 
-Head to the **[Releases page](../../releases)** and download the latest version for your platform:
+Go to the **[Releases page](../../releases)** and download the latest version for your platform:
 
-| Platform | File |
-|----------|------|
+| Platform | File                    |
+| -------- | ----------------------- |
 | macOS    | `YT.Downloader.app.zip` |
-| Windows  | `YT.Downloader.exe` |
+| Windows  | `YT.Downloader.exe`     |
 
-**macOS:** Unzip and double-click. If macOS blocks it ("unidentified developer"), right-click → Open → Open anyway.
+**macOS:** Unzip and double-click. If macOS blocks it as an unidentified developer, right-click the app, choose **Open**, then click **Open** again.
 
-**Windows:** Just double-click the `.exe`. If Windows Defender shows a SmartScreen warning, click "More info" → "Run anyway". This happens because the app isn't code-signed — the app itself is safe.
+**Windows:** Double-click the `.exe`. If Windows Defender shows a SmartScreen warning, click **More info** → **Run anyway**. This happens because the app is not code-signed.
 
 ---
 
 ## Build it yourself
 
-If you'd rather build from source than trust a pre-built binary, follow the instructions below. Building requires Python — but the output app/exe does not.
+If you prefer building from source instead of using a pre-built binary, follow the instructions below. Building requires Python, but the final app/exe does not.
 
 ### Prerequisites (both platforms)
 
-- [Python 3.10+](https://python.org) — on Windows, check **"Add Python to PATH"** during install
-- [ffmpeg](https://ffmpeg.org) — required for MP3 conversion and MP4 re-encoding
+* [Python 3.10+](https://python.org) — on Windows, enable **"Add Python to PATH"** during installation
+* [ffmpeg](https://ffmpeg.org) — required for MP3 conversion and MP4 re-encoding
 
 **Install ffmpeg:**
-- macOS: `brew install ffmpeg`
-- Windows: Download from [gyan.dev/ffmpeg/builds](https://www.gyan.dev/ffmpeg/builds/) (grab the "essentials" build), extract, and either add to PATH or place `ffmpeg.exe` + `ffprobe.exe` next to the build script
+
+* macOS: `brew install ffmpeg`
+* Windows: Download from [gyan.dev/ffmpeg/builds](https://www.gyan.dev/ffmpeg/builds/) (use the "essentials" build), extract it, and either add it to PATH or place `ffmpeg.exe` and `ffprobe.exe` next to the build script
 
 ---
 
@@ -60,7 +61,7 @@ If you'd rather build from source than trust a pre-built binary, follow the inst
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/yt-downloader.git
+git clone https://github.com/moishy-r/yt-downloader.git
 cd yt-downloader/mac
 
 # 2. Make the build script executable
@@ -70,7 +71,7 @@ chmod +x build.sh
 ./build.sh
 ```
 
-The script installs all Python dependencies automatically. When it finishes, Finder will open the `dist/` folder containing `YT Downloader.app`. Double-click it to run, or drag it to your Applications folder.
+The script installs all Python dependencies automatically. When it finishes, Finder opens the `dist/` folder containing `YT Downloader.app`.
 
 ---
 
@@ -78,7 +79,7 @@ The script installs all Python dependencies automatically. When it finishes, Fin
 
 ```bat
 :: 1. Clone the repo (or download the ZIP from GitHub)
-git clone https://github.com/YOUR_USERNAME/yt-downloader.git
+git clone https://github.com/moishy-r/yt-downloader.git
 cd yt-downloader\windows
 
 :: 2. Double-click build_windows.bat
@@ -86,7 +87,7 @@ cd yt-downloader\windows
 build_windows.bat
 ```
 
-The script installs all Python dependencies automatically. When it finishes, Explorer will open the `dist\` folder containing `YT Downloader.exe`. Move it anywhere — Desktop, `C:\Apps`, a USB drive. It has no installer and leaves nothing in the registry.
+The script installs all Python dependencies automatically. When it finishes, Explorer opens the `dist\` folder containing `YT Downloader.exe`. You can move it anywhere — Desktop, `C:\Apps`, or a USB drive. It has no installer and does not modify the registry.
 
 ---
 
@@ -94,15 +95,15 @@ The script installs all Python dependencies automatically. When it finishes, Exp
 
 When choosing a save location, you can type any of these instead of a full path:
 
-| Shorthand | Resolves to |
-|-----------|-------------|
-| `$desktop` | `~/Desktop` |
-| `$downloads` | `~/Downloads` |
-| `$documents` | `~/Documents` |
-| `$music` | `~/Music` |
-| `$videos` | `~/Movies` (macOS) / `~/Videos` (Windows) |
-| `$home` | Your home directory |
-| `~` | Your home directory |
+| Shorthand    | Resolves to                               |
+| ------------ | ----------------------------------------- |
+| `$desktop`   | `~/Desktop`                               |
+| `$downloads` | `~/Downloads`                             |
+| `$documents` | `~/Documents`                             |
+| `$music`     | `~/Music`                                 |
+| `$videos`    | `~/Movies` (macOS) / `~/Videos` (Windows) |
+| `$home`      | Your home directory                       |
+| `~`          | Your home directory                       |
 
 You can also use relative paths (`../my-folder`), environment variables (`%USERPROFILE%\Music` on Windows), and standard absolute paths.
 
@@ -110,42 +111,42 @@ You can also use relative paths (`../my-folder`), environment variables (`%USERP
 
 ## Repo structure
 
-```
+```text
 yt-downloader/
 ├── README.md
 ├── .gitignore
 │
 ├── core/
-│   └── downloader.py          # Shared logic — all frontends import from here
+│   └── downloader.py          # Shared logic used by all frontends
 │
 ├── mac/
-│   ├── yt_downloader_gui.py   # macOS GUI (UI only, no download logic)
+│   ├── yt_downloader_gui.py   # macOS GUI (UI only)
 │   └── build.sh               # Builds YT Downloader.app via PyInstaller
 │
 ├── windows/
-│   ├── yt_downloader_gui_windows.py  # Windows GUI (UI only, no download logic)
+│   ├── yt_downloader_gui_windows.py  # Windows GUI (UI only)
 │   └── build_windows.bat             # Builds YT Downloader.exe via PyInstaller
 │
 └── cli/
-    └── yt_downloader_cli.py   # Terminal frontend — interactive or flag-driven
+    └── yt_downloader_cli.py   # Terminal frontend
 ```
 
-All download logic — fetching playlist metadata, building yt-dlp options, path resolution, ETA calculation — lives exclusively in `core/downloader.py`. The GUI and CLI files contain only UI code. This means bug fixes and new features go in one place and every frontend gets them automatically.
+All download logic — playlist metadata fetching, yt-dlp configuration, path resolution, and ETA calculation — lives in `core/downloader.py`. The GUI and CLI files only handle user interaction, so bug fixes and new features apply everywhere automatically.
 
 ---
 
 ## CLI
 
-The CLI works on macOS, Windows, and Linux. No build step needed — just Python.
+The CLI works on macOS, Windows, and Linux. No build step is required.
 
 ```bash
 # Install dependencies once
 pip install yt-dlp certifi
 
-# Interactive mode — walks you through everything (same experience as the terminal version)
+# Interactive mode
 python cli/yt_downloader_cli.py
 
-# Non-interactive — pass everything as flags (good for scripting)
+# Non-interactive mode (useful for scripting)
 python cli/yt_downloader_cli.py --url "https://youtube.com/playlist?list=..." --fmt mp3 --quality 320
 
 # Download specific videos from a playlist (by index)
@@ -161,50 +162,64 @@ Run `python cli/yt_downloader_cli.py --help` for the full list of flags.
 
 ## How it works
 
-The app is built around a shared `core/downloader.py` module that contains all download logic — playlist fetching, yt-dlp configuration, path resolution, and progress calculation. The macOS GUI, Windows GUI, and CLI are thin frontends that only handle user interaction; they import everything from core. This means a bug fixed or feature added in `core/` is instantly available in all three frontends.
+The app is built around a shared `core/downloader.py` module that handles playlist fetching, yt-dlp configuration, path resolution, and progress calculation. The macOS GUI, Windows GUI, and CLI are lightweight frontends that import functionality from `core/`.
 
-The GUIs use Python's built-in [tkinter](https://docs.python.org/3/library/tkinter.html) library (no extra UI dependencies) wrapped around [yt-dlp](https://github.com/yt-dlp/yt-dlp). [PyInstaller](https://pyinstaller.org) bundles Python, yt-dlp, certifi (SSL certificates), and ffmpeg into a single self-contained binary — no runtime dependencies needed to run the built app.
+The GUIs use Python's built-in [tkinter](https://docs.python.org/3/library/tkinter.html) library together with [yt-dlp](https://github.com/yt-dlp/yt-dlp). [PyInstaller](https://pyinstaller.org) bundles Python, yt-dlp, certifi (SSL certificates), and ffmpeg into a standalone executable.
 
 ---
 
 ## Troubleshooting
 
-**"SSL certificate verify failed" on macOS**
-This is fixed automatically by the app. If you see it anyway, run `pip install --upgrade certifi` and rebuild.
+### "SSL certificate verify failed" on macOS
 
-**No video in the MP4, only audio**
-This happens when the video was downloaded in VP9/AV1 format, which QuickTime doesn't support. The app explicitly requests H.264 + AAC and re-encodes via ffmpeg if needed. Make sure ffmpeg is installed and was bundled during the build.
+This should already be handled automatically. If it still appears, run:
 
-**ffmpeg not found during build**
-- macOS: `brew install ffmpeg`
-- Windows: Place `ffmpeg.exe` and `ffprobe.exe` in the same folder as `build_windows.bat`, then re-run the script.
+```bash
+pip install --upgrade certifi
+```
 
-**Windows SmartScreen / Defender warning**
-The executable is not code-signed (signing costs ~$200–$400/year). Click "More info" → "Run anyway". If you don't trust the pre-built binary, build it yourself from source — the code is fully visible in this repo.
+Then rebuild the app.
 
-**macOS "app is damaged" or "unidentified developer"**
-Right-click the app → Open → Open. If that doesn't work, run:
+### MP4 download has audio but no video
+
+This usually happens when a video is downloaded in VP9 or AV1 format, which QuickTime does not support. The app requests H.264 + AAC and re-encodes through ffmpeg when needed. Make sure ffmpeg is installed and bundled during the build.
+
+### ffmpeg not found during build
+
+* macOS: `brew install ffmpeg`
+* Windows: Place `ffmpeg.exe` and `ffprobe.exe` in the same folder as `build_windows.bat`, then run the script again
+
+### Windows SmartScreen / Defender warning
+
+The executable is not code-signed. Click **More info** → **Run anyway**. If you prefer, you can build the app yourself from source.
+
+### macOS "app is damaged" or "unidentified developer"
+
+Right-click the app and choose **Open**. If that still fails, run:
+
 ```bash
 xattr -cr "/Applications/YT Downloader.app"
 ```
 
-**A playlist video was skipped**
-Private, members-only, age-restricted, or region-blocked videos are automatically skipped. The rest of the playlist will still download.
+### A playlist video was skipped
 
-**The ETA shows `--:--`**
-This happens briefly at the very start of a download before enough data has been transferred to calculate a reliable speed. It corrects itself within a few seconds.
+Private, members-only, age-restricted, or region-blocked videos are skipped automatically. The rest of the playlist will still download.
+
+### The ETA shows `--:--`
+
+This can happen briefly at the beginning of a download before enough data is available to estimate speed.
 
 ---
 
 ## Dependencies
 
-| Package | Purpose |
-|---------|---------|
-| [yt-dlp](https://github.com/yt-dlp/yt-dlp) | YouTube extraction and downloading |
-| [certifi](https://github.com/certifi/python-certifi) | Up-to-date SSL CA certificates |
-| [ffmpeg](https://ffmpeg.org) | Audio extraction, video re-encoding, thumbnail embedding |
-| [PyInstaller](https://pyinstaller.org) | Packaging into a standalone binary (build-time only) |
-| tkinter | GUI — included with Python, no install needed |
+| Package                                                   | Purpose                                                  |
+| --------------------------------------------------------- | -------------------------------------------------------- |
+| [yt-dlp](https://github.com/yt-dlp/yt-dlp)                | YouTube extraction and downloading                       |
+| [certifi](https://github.com/certifi/python-certifi)      | SSL CA certificates                                      |
+| [ffmpeg](https://ffmpeg.org)                              | Audio extraction, video re-encoding, thumbnail embedding |
+| [PyInstaller](https://pyinstaller.org)                    | Packaging into a standalone binary (build-time only)     |
+| [tkinter](https://docs.python.org/3/library/tkinter.html) | GUI toolkit included with Python                         |
 
 ---
 
@@ -212,14 +227,14 @@ This happens briefly at the very start of a download before enough data has been
 
 > **This project is intended for personal, educational, and research purposes only.**
 
-- This tool is not affiliated with, endorsed by, or connected to YouTube or Google LLC in any way.
-- Downloading YouTube content may violate [YouTube's Terms of Service](https://www.youtube.com/t/terms), specifically section 5.1.K, which prohibits downloading content without explicit permission from YouTube.
-- You are solely responsible for how you use this tool and for ensuring your use complies with all applicable laws and platform terms in your jurisdiction.
-- Only download content you have the right to download — this includes content you own, content explicitly licensed for download (e.g. Creative Commons), or content where you have obtained permission from the rights holder.
-- Downloading copyrighted music, movies, or other media without authorization may infringe on copyright law in your country.
-- The author of this project accepts no liability for misuse, copyright infringement, or any damages arising from the use of this software.
+* This tool is not affiliated with or endorsed by YouTube or Google LLC.
+* Downloading YouTube content may violate [YouTube's Terms of Service](https://www.youtube.com/t/terms), specifically section 5.1.K, which prohibits downloading content without explicit permission from YouTube.
+* You are responsible for ensuring your use complies with applicable laws and platform terms.
+* Only download content you have permission to download, including your own content or content explicitly licensed for download.
+* Downloading copyrighted media without authorization may violate copyright law.
+* The author is not liable for misuse, copyright infringement, or damages arising from use of this software.
 
-**If you are a content creator and would like your content removed from someone's use of this tool, please contact that individual directly.**
+**If you are a content creator and want your content removed from someone's use of this tool, contact that individual directly.**
 
 ---
 
@@ -227,11 +242,11 @@ This happens briefly at the very start of a download before enough data has been
 
 MIT License — see [LICENSE](LICENSE) for details.
 
-You are free to use, modify, and distribute this software. The MIT license covers the code in this repository only and does not grant any rights with respect to YouTube content or third-party services.
+You are free to use, modify, and distribute this software. The MIT license applies only to the code in this repository and does not grant rights to YouTube content or third-party services.
 
 ---
 
 <p align="center">
-  Built with <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> · 
+  Built with <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> ·
   Packaged with <a href="https://pyinstaller.org">PyInstaller</a>
 </p>
