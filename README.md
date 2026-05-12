@@ -156,10 +156,9 @@ Relative paths, `%USERPROFILE%` style env vars on Windows, and standard absolute
 
 ## How it works
 
-All download logic lives in `core/downloader.py` -- playlist fetching, yt-dlp configuration, path resolution, progress calculation. The macOS GUI, Windows GUI, CLI, and web server are all thin frontends that import from core. Fixes and new features go in one place and every frontend picks them up automatically.
+All download logic lives in `core/downloader.py`, including playlist fetching, yt-dlp configuration, path resolution, and progress calculation. The macOS GUI, Windows GUI, CLI, and web server are all thin frontends built on top of the shared core, so fixes and new features only need to be implemented once to propagate everywhere automatically.
 
-The desktop GUIs are built with Python's built-in [tkinter](https://docs.python.org/3/library/tkinter.html) library and [yt-dlp](https://github.com/yt-dlp/yt-dlp). [PyInstaller](https://pyinstaller.org) bundles everything -- Python, yt-dlp, certifi, and ffmpeg -- into a single binary with no external dependencies. The web interface uses [Flask](https://flask.palletsprojects.com/) and streams progress to the browser in real time via Server-Sent Events.
-
+The desktop GUIs are built with Python’s built-in [tkinter](https://docs.python.org/3/library/tkinter.html) library and [yt-dlp](https://github.com/yt-dlp/yt-dlp). [PyInstaller](https://pyinstaller.org) packages Python, yt-dlp, certifi, and ffmpeg into a single standalone binary with no external dependencies. The web interface is powered by [Flask](https://flask.palletsprojects.com/) and streams live progress updates to the browser using Server-Sent Events.
 ### Repo structure
 
 ```
