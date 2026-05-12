@@ -1,6 +1,6 @@
 # YT Downloader
 
-A clean, modern desktop app for downloading YouTube videos and playlists as **MP3** or **MP4**. No terminal or commands needed — just paste a URL and click download.
+A desktop app (and self-hosted web interface) for downloading YouTube videos and playlists as MP3 or MP4. No terminal required. Paste a URL, pick your settings, and download.
 
 > **Pre-built binaries are available on the [Releases page](../../releases). No Python required.**
 
@@ -91,32 +91,6 @@ The script installs all Python dependencies automatically. When it finishes, Exp
 
 ---
 
-## Repo structure
-
-```text
-yt-downloader/
-├── README.md
-├── .gitignore
-│
-├── core/
-│   └── downloader.py          # Shared logic used by all frontends
-│
-├── mac/
-│   ├── yt_downloader_gui.py   # macOS GUI (UI only)
-│   └── build.sh               # Builds YT Downloader.app via PyInstaller
-│
-├── windows/
-│   ├── yt_downloader_gui_windows.py  # Windows GUI (UI only)
-│   └── build_windows.bat             # Builds YT Downloader.exe via PyInstaller
-│
-└── cli/
-    └── yt_downloader_cli.py   # Terminal frontend
-```
-
-All download logic — playlist metadata fetching, yt-dlp configuration, path resolution, and ETA calculation — lives in `core/downloader.py`. The GUI and CLI files only handle user interaction, so bug fixes and new features apply everywhere automatically.
-
----
-
 ## CLI
 
 The CLI works on macOS, Windows, and Linux. No build step needed.
@@ -182,9 +156,33 @@ Relative paths, `%USERPROFILE%` style env vars on Windows, and standard absolute
 
 ## How it works
 
-The app is built around a shared `core/downloader.py` module that handles playlist fetching, yt-dlp configuration, path resolution, and progress calculation. The macOS GUI, Windows GUI, and CLI are lightweight frontends that import functionality from `core/`.
+All download logic lives in `core/downloader.py` -- playlist fetching, yt-dlp configuration, path resolution, progress calculation. The macOS GUI, Windows GUI, CLI, and web server are all thin frontends that import from core. Fixes and new features go in one place and every frontend picks them up automatically.
 
-The GUIs use Python's built-in [tkinter](https://docs.python.org/3/library/tkinter.html) library together with [yt-dlp](https://github.com/yt-dlp/yt-dlp). [PyInstaller](https://pyinstaller.org) bundles Python, yt-dlp, certifi (SSL certificates), and ffmpeg into a standalone executable.
+The desktop GUIs are built with Python's built-in [tkinter](https://docs.python.org/3/library/tkinter.html) library and [yt-dlp](https://github.com/yt-dlp/yt-dlp). [PyInstaller](https://pyinstaller.org) bundles everything -- Python, yt-dlp, certifi, and ffmpeg -- into a single binary with no external dependencies. The web interface uses [Flask](https://flask.palletsprojects.com/) and streams progress to the browser in real time via Server-Sent Events.
+
+### Repo structure
+
+```
+yt-downloader/
+├── core/
+│   └── downloader.py                 # All download logic lives here
+├── mac/
+│   ├── yt_downloader_gui.py          # macOS GUI (UI only)
+│   └── build.sh                      # Builds YT Downloader.app
+├── windows/
+│   ├── yt_downloader_gui_windows.py  # Windows GUI (UI only)
+│   └── build_windows.bat             # Builds YT Downloader.exe
+├── cli/
+│   └── yt_downloader_cli.py          # Terminal frontend
+├── web/
+│   ├── app.py                        # Flask server
+│   ├── requirements.txt
+│   ├── README.md
+│   └── templates/
+│       └── index.html                # Browser UI
+├── .gitignore
+└── README.md
+```
 
 ---
 
